@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import Sequelize from 'sequelize';
 import { paginate } from 'paginate-info';
 import Models from '../database/models';
@@ -31,7 +30,6 @@ class assign {
       }
     } catch (error) {
       return res.status(500).json({
-        status: 500,
         message: error.message,
       });
     }
@@ -60,7 +58,6 @@ class assign {
       return AssignBusesToRoutesResponses(res, 200, 'Here are the buses assigned to routes', pagination, rows);
     } catch (error) {
       return res.status(500).json({
-        status: 500,
         message: error.message,
       });
     }

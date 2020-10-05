@@ -6,11 +6,11 @@ export const reset = Joi.object().keys({
 });
 
 export const validationErrorReset = (req, res, next) => {
-  const { error } = reset.validate(req.body);
-  if (error) {
+  const { err } = reset.validate(req.body);
+  if (err) {
     res.status(400).json({
       status: 400,
-      message: error.details[0].message.replace(/"/g, ''),
+      message: err.details[0].message.replace(/"/g, ''),
     });
   }
   next();

@@ -1,0 +1,10 @@
+{
+	"200": 200,
+	"Welcome to phantom!.": "Welcome to phantom!.",
+	"logged In successfull": "logged In successfull",
+	"Invalid email or password": "Invalid email or password",
+	"Welcome to phantom, a platform to facilitate the transportation mode in town!.": "Welcome to phantom, a platform to facilitate the transportation mode in town!.",
+	"The user with this email ": "The user with this email ",
+	"Please enter role": "Please enter role",
+	"Invalid role,role must be user,driver,operator or admin": "Invalid role,role must be user,driver,operator or admin"
+}

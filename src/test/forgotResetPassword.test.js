@@ -22,9 +22,9 @@ describe('Tests for the forgotten link and the reseting password of the users', 
       .put(prefix1)
       .send(user[4])
       .end((error, res) => {
-        expect(res).to.have.status([400]);
+        expect(res).to.have.status([401]);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(400);
+        expect(res.body.status).to.be.equal(401);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
@@ -35,9 +35,9 @@ describe('Tests for the forgotten link and the reseting password of the users', 
       .put(prefix2)
       .send(user[4])
       .end((error, res) => {
-        expect(res).to.have.status([400]);
+        expect(res).to.have.status([401]);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(400);
+        expect(res.body.status).to.be.equal(401);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
@@ -106,6 +106,63 @@ describe('Tests for the forgotten link and the reseting password of the users', 
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
+      });
+  });
+  it('it should not reset if password does not provided', (done) => {
+    chai.request(app)
+    .post(prefix)
+    .send(user[11])
+    .end((err, res) => {
+        expect(res).to.have.status([403]);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(403);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+      done();
+      });
+  });
+  it('it should not reset if token expired', (done) => {
+    chai.request(app)
+    .post(prefix2)
+    .send(user[11])
+    .end((err, res) => {
+        expect(res).to.have.status([404]);
+      done();
+      });
+  });
+  it('it should not reset if password is short', (done) => {
+    chai.request(app)
+    .post(prefix)
+    .send(user[11])
+    .end((err, res) => {
+       expect(res).to.have.status([403]);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(403);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+      done();
+      });
+  });
+  it('it should not reset if confirm password is not provided', (done) => {
+    chai.request(app)
+    .post(prefix)
+    .send(user[11])
+    .end((err, res) => {
+       expect(res).to.have.status([403]);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(403);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+      done();
+      });
+  });
+  it('it should not reset  if confirm password does not match to provided password', (done) => {
+    chai.request(app)
+    .put(prefix)
+    .send(user[11])
+    .end((err, res) => {
+      expect(res).to.have.status([404]);
+      done();
       });
   });
 });

@@ -45,7 +45,7 @@ describe(' Test update profile', () => {
       .set('x-access-token', driverToken)
       .send(data.isShort)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(400)
         done();
       });
   });

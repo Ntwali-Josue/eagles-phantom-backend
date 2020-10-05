@@ -67,7 +67,6 @@ class register {
   }
 
   static async login(req, res) {
-    // eslint-disable-next-line no-shadow
     const { email, password } = req.body;
     try {
       const user = await Users.findOne({
@@ -99,9 +98,6 @@ class register {
       });
     }
   }
-
-  // updating driver or operator profile
-
   static async updateProfile(req, res) {
     try {
       const { email } = req.user;
@@ -129,28 +125,6 @@ class register {
       return res.status(500).send(error.message);
     }
   }
-
-  // ---getall
-  static async getallusers(req, res) {
-    const users = await Users.findAll({
-      where: {
-        [Op.or]: [
-          { role: 'driver' },
-          { role: 'operator' },
-        ],
-      },
-      attributes: {
-        exclude: ['password'],
-      },
-    });
-    return res.status(200).json({
-      status: 'success',
-      data: {
-        users,
-      },
-    });
-  }
-
   static async forgot(req, res) {
     try {
       const { email } = req.body;
@@ -187,43 +161,47 @@ class register {
   }
 
   static async resetPassword(req, res) {
-    const { newpassword } = req.body;
-    const { confirmation } = req.body;
-
-    jwt.verify(
-      req.params.resetToken,
-      process.env.SECRET_KEY,
-      (err, decodeData) => {
-        if (err) {
-          return res.status(401).json({ status: 400, message: res.__('Invalid or expired Token') });
-        }
-      },
-    );
-    const user = await Users.findOne({
-      where: { resetlink: req.params.resetToken },
-    });
-    if (!user) {
-      return res.status(403).json({
-        status: 403,
-        message: res.__('this user doesn`t exist in the system'),
+    try{
+      const { newpassword } = req.body;
+      const { confirmation } = req.body;
+  
+      jwt.verify(
+        req.params.resetToken,
+        process.env.SECRET_KEY,
+        (error) => {
+          if (error) {
+            return res.status(401).json({ status: 401, message: res.__('Invalid or expired Token') });
+          }
+        },
+      );
+      const user = await Users.findOne({
+        where: { resetlink: req.params.resetToken },
+      });
+      if (!user) {
+        return res.status(404).json({
+          status: 404,
+          message: res.__('this user doesn`t exist in the system'),
+        });
+      }
+      if (newpassword !== confirmation) {
+        return res.status(400).json({
+          status: 400,
+          message: res.__('The password and its confirmation are not the same'),
+        });
+      }
+      const cryption = bcrypt.hashSync(newpassword, 10);
+  
+      await user.update({ password: cryption, resetlink: '' });
+  
+      return res.status(200).json({
+        status: 200,
+        Message: res.__('Password changed Successfully'),
       });
     }
-    if (newpassword !== confirmation) {
-      return res.status(400).json({
-        status: 400,
-        message: res.__('The password and its confirmation are not the same'),
-      });
-    }
-
-    const cryption = bcrypt.hashSync(newpassword, 10);
-
-    await user.update({ password: cryption, resetlink: '' });
-
-    return res.status(403).json({
-      status: 403,
-      Message: res.__('Password changed Successfully'),
-    });
+   catch(err){
+     
+       }
   }
+  
 }
-
 export default register;

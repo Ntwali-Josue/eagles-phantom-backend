@@ -1,5 +1,6 @@
 import { Model } from 'sequelize';
 
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**

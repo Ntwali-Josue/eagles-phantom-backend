@@ -2,11 +2,13 @@ import { Router } from 'express';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerOptions from '../utils/swaggerOptions';
-
 import welcomeRoute from './welcome.route';
 import userRoute from './users.routes';
 import busRoute from './bus.routers';
 import assignmentRoutes from './AssignmentBusesRoutes';
+
+import route from './routers';
+
 
 const swaggerDoc = swaggerJsdoc(swaggerOptions);
 const router = Router();
@@ -14,6 +16,7 @@ const router = Router();
 router.use(welcomeRoute);
 
 router.use('/api/v1/auth', userRoute);
+router.use('/api/v1/users',route);
 
 router.use('/api/v1/', busRoute);
 router.use('/api/v1', assignmentRoutes);

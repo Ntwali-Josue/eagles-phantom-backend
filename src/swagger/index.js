@@ -38,4 +38,7 @@ const swaggerDocument = swaggerJSDoc(swaggerDefinition);
 
 router.use('/', swaggerui.serve, swaggerui.setup(swaggerDocument));
 
+
+
 export default router;
+

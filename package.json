@@ -12,7 +12,7 @@
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
     "seed:test": "cross-env NODE_ENV=test sequelize db:seed:all",
-    "migrate:heroku": "npm run migrate:reset && npm run seed",
+    "migrate:heroku": "npm run migrate:reset &&  npm run seed",
     "clean": "rm -rf build && mkdir build",
     "build-src": "babel -d ./build ./src -s",
     "build": "npm run migrate:heroku && npm run clean && npm run build-src",
@@ -20,7 +20,8 @@
   },
   "nyc": {
     "exclude": [
-      "src/database",
+      "src/database/seeders",
+      "src/database/migrations",
       "coverage"
     ]
   },
@@ -45,7 +46,7 @@
     "@hapi/joi": "^17.1.1",
     "@sendgrid/mail": "^7.3.0",
     "bcrypt": "^5.0.0",
-    "bcryptjs": "^2.4.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -58,12 +59,15 @@
     "glob": "^7.1.6",
     "i18n": "^0.13.2",
     "jest": "^26.5.2",
+    "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.4",
     "paginate-info": "^1.0.4",
     "pg": "^8.4.0",
+    "path": "^0.12.7",
     "pg-hstore": "^2.3.3",
+    "rm": "^0.1.8",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
     "swagger-jsdoc": "^4.0.0",
