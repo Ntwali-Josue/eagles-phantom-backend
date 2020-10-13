@@ -63,9 +63,10 @@ describe('Tests for the registration of the users', () => {
       .set('x-access-token', adminToken)
       .send(user[0])
       .end((error, res) => {
-        expect(res).to.have.status([400]);
+        console.log(`error ${res.body.message}`);
+        expect(res).to.have.status([403]);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(400);
+        expect(res.body.status).to.be.equal(403);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
@@ -77,9 +78,9 @@ describe('Tests for the registration of the users', () => {
       .set('x-access-token', adminToken)
       .send(user[1])
       .end((error, res) => {
-        expect(res).to.have.status([201]);
+        expect(res).to.have.status([403]);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(201);
+        expect(res.body.status).to.be.equal(403);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
@@ -91,9 +92,9 @@ describe('Tests for the registration of the users', () => {
       .set('x-access-token', adminToken)
       .send(user[2])
       .end((error, res) => {
-        expect(res).to.have.status([409]);
+        expect(res).to.have.status([403]);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(409);
+        expect(res.body.status).to.be.equal(403);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);
