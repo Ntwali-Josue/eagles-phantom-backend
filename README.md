@@ -47,7 +47,9 @@ Modernize the public transport, in order to accelerate and facilitate the displa
 ### Running tests (for the testing of the endpoint)
    * Run `npm test` in terminal
 
-### Api Documentation 
-[Swagger Documentation](http://localhost:3020/api-docs/#/)
+### Deployment 
+[Heroku](https://eagles-phantom-backend.herokuapp.com/)
 
+### Api Documentation 
+[Swagger Documentation](https://eagles-phantom-backend.herokuapp.com/api-docs)
 

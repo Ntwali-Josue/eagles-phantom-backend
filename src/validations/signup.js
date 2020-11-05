@@ -12,7 +12,7 @@ export const signup = Joi.object().keys({
 
 export const validationError = (req, res, next) => {
   const { error } = signup.validate(req.body);
-  console.log(`this is ereq ${JSON.stringify(req.body)}`);
+ console.log(`this is ereq ${JSON.stringify(req.body)}`);
   if (error) {
     return res.status(400).json({
       status: 400,

@@ -6,7 +6,7 @@ import Models from '../database/models';
 import { password } from '../utils/password';
 import { message } from '../utils/mails';
 import { encode } from '../utils/jwt';
-
+const { Op } = require("sequelize");
 dotenv.config();
 mail.setApiKey(process.env.SENDGRID);
 const { Users } = Models;
@@ -95,5 +95,64 @@ class register {
       });
     }
   }
+
+//updating driver or operator profile
+
+static async updateProfile (req, res){
+  try {
+    
+    const {email}=req.user;
+    const updatedField  = await Users.update(req.body, { 
+      where: { email },
+      returning: true,
+      plain: true,
+    });
+
+   const userData = updatedField[1]
+      return res.status(200).json({ 
+        status: 200,
+        message: "user updated",
+        data:  {
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        role:userData.role,
+        dateofbirth:userData.dateofbirth,
+        gender:userData.gender,
+        address:userData.address
+       }
+      })
+
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+  
 }
+
+//---getall
+static async getallusers(req,res){
+
+    const users = await Users.findAll({ where: {
+      [Op.or]: [
+        { role: 'driver' },
+        { role: 'operator' }
+      ]
+    },attributes:{
+      exclude:['password']
+    }});
+  res.status(200).json({
+    status:'success',
+    data:{
+      users
+    }
+  })
+  
+  
+}
+
+
+
+}
+
 export default register;
+

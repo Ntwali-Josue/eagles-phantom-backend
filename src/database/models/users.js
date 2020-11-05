@@ -13,6 +13,11 @@ export default (sequelize, DataTypes) => {
     role: DataTypes.STRING,
   }, {});
   Users.associate = (models) => {
+    Users.hasOne(models.Bus, {
+      foreignKey: 'userId',
+      as: 'driver',
+      onDelete: 'CASCADE',
+    });
   };
   return Users;
 };

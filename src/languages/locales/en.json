@@ -6,5 +6,18 @@
 	"Welcome to phantom, a platform to facilitate the transportation mode in town!.": "Welcome to phantom, a platform to facilitate the transportation mode in town!.",
 	"The user with this email ": "The user with this email ",
 	"User with that email is not found": "User with that email is not found",
-	"Please sign as the admin": "Please sign as the admin"
+	"Please sign as the admin": "Please sign as the admin",
+	"provide valid email": "provide valid email",
+	"email is required": "email is required",
+	"Email must not be empty": "Email must not be empty",
+	"user is not assigned to bus": "user is not assigned to bus",
+	"Driver is already assigned": "Driver is already assigned",
+	"can't get buses": "can't get buses",
+	"page not found": "page not found",
+	"Bus created successfully.": "Bus created successfully.",
+	"Email is not found": "Email is not found",
+	"user is not driver": "user is not driver",
+	"Bus with": "Bus with",
+	"already assigned": "already assigned",
+	"bus doesn't exist": "bus doesn't exist"
 }
