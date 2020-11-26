@@ -1,6 +1,7 @@
 import express from 'express';
 import userController from '../controllers/userController';
 import checkUser from '../middleware/checkUser';
+import existUser from '../middleware/checkUser1'
 import { validationError } from '../validations/signup';
 import { validation } from '../validations/updateProfile';
 import { validationErrorForgotten } from '../validations/validationErrorForgotten';
@@ -46,6 +47,25 @@ const router = express.Router();
  */
 
 router.post('/login', userController.login);
+
+/**
+ * @swagger
+ * /api/v1/auth/logout:
+ *   get:
+ *     tags:
+ *       - Log-out
+ *     name: logout
+ *     summary: Log out auth-user
+ *     produces:
+ *       - application/json
+ *     consumes:
+ *       - application/json
+ *     responses:
+ *       '200':
+ *             description: User is successfully logged out
+ * */
+
+router.get('/logout', checkUser,userController.logout);  
 
 /**
 * @swagger

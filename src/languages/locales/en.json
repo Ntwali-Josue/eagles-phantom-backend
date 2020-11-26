@@ -31,5 +31,7 @@
 	"Bus updated successfully": "Bus updated successfully",
 	"The bus you're searching for doesn't exist in the system": "The bus you're searching for doesn't exist in the system",
 	"Bus retrieved successfully": "Bus retrieved successfully",
-	"can't update bus": "can't update bus"
+	"can't update bus": "can't update bus",
+	"log in to get access": "log in to get access",
+	"Logout successfully": "Logout successfully"
 }

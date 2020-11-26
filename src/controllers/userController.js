@@ -3,6 +3,7 @@ import mail from '@sendgrid/mail';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import localStorage from 'localStorage';
 import Models from '../database/models';
 import { password } from '../utils/password';
 import { message } from '../utils/mails';
@@ -87,6 +88,9 @@ class register {
       }
       const payload = { email, role: user.role };
       const accessToken = encode(payload);
+
+      localStorage.setItem('accessToken',accessToken);
+
       return res.status(200).json({
         status: 200,
         message: res.__('logged In successfull'),
@@ -99,7 +103,21 @@ class register {
       });
     }
   }
+//logout an authenticated user
+// static async logout(req, res) {
 
+//     localStorage.removeItem("accessToken");;
+//     return res.status(200).json({ 
+//       status: 200, 
+//       message:res._('you are successfully logged out') });
+//       res.redirect('/')
+// }
+static async logout(req,res){
+  localStorage.removeItem("accessToken");
+  res.status(200).json({ status: 200, message:res.__('Logout successfully')});
+  res.redirect('/')
+
+}
   // updating driver or operator profile
 
   static async updateProfile(req, res) {

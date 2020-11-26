@@ -60,6 +60,7 @@
     "i18n": "^0.13.2",
     "jest": "^26.5.2",
     "jsonwebtoken": "^8.5.1",
+    "localStorage": "^1.0.4",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.4",
     "paginate-info": "^1.0.4",
